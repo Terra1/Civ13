@@ -263,6 +263,17 @@
 
 /client/Move(n, direct, ordinal = FALSE)
 
+	delay = TICKS2DS(-round(-(DS2TICKS(delay)))) //Rounded to the next tick in equivalent ds
+	mob.glide_size = world.icon_size/max(DS2TICKS(delay),1) //Down to whatever decimal
+
+	. = ..()
+	mob.setDir(direct)
+
+	if((direct & (direct - 1)) && mob.loc == n) //moved diagonally successfully
+		delay = mob.movement_delay() * 2 //Will prevent mob diagonal moves from smoothing accurately, sadly
+
+	move_delay += delay
+
 	// these checks occur once in the movement process, but they currently have to be rewritten here due to initial movements
 	if (!canmove)
 		return
