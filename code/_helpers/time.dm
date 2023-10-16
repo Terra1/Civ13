@@ -15,6 +15,10 @@
 
 #define CHECK_TICK if (world.tick_usage > 80) sleep(world.tick_lag)
 
+#define DS2TICKS(DS) ((DS)/world.tick_lag)
+
+#define TICKS2DS(T) ((T) TICKS)
+
 /proc/get_game_time()
 	var/global/time_offset = 0
 	var/global/last_time = 0
