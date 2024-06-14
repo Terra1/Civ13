@@ -152,8 +152,22 @@
 			found += A.search_contents_for (path,filter_path)
 	return found
 
-
-
+/**
+ * Sets the atom's density, raises the density set event, and updates turfs for dense atom checks.
+ *
+ * **Parameters**:
+ * - `new_density` boolean - The new density value to set.
+ */
+/atom/proc/set_density(new_density)
+	var/changed = density != new_density
+	if(changed)
+		density = !density
+		if (isturf(loc))
+			var/turf/T = loc
+			if (density)
+				T.has_dense_atom = TRUE
+			else
+				T.has_dense_atom = null
 
 
 //All atoms

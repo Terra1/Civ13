@@ -34,6 +34,41 @@
 
 	return FALSE
 
+/**
+ * Fetches all held items of the given path.
+ *
+ * If not passed any parameters, will simply fetch all held items.
+ *
+ * **Parameters**:
+ * - `item_path` (path) - Path to the item type to fetch. Must be a type of `/obj/item`.
+ *
+ * Returns list of found instances, or null.
+ */
+/mob/proc/GetAllHeld(item_path)
+	. = list()
+
+	if (HandsEmpty())
+		return null
+
+	if (!item_path)
+		if (l_hand)
+			. += l_hand
+		if (r_hand)
+			. += r_hand
+		return
+
+	if (ispath(item_path, /obj/item))
+		if (istype(l_hand, item_path))
+			. += l_hand
+		if (istype(r_hand, item_path))
+			. += r_hand
+		return
+
+	crash_with("Invalid path supplied: Not a valid subtype of `/obj/item`.")
+
+/// Whether or not the mob's hands or other holding slots are empty. Returns boolean.
+/mob/proc/HandsEmpty()
+	return isnull(l_hand) && isnull(r_hand)
 
 //This is a SAFE proc. Use this instead of equip_to_slot()!
 //set del_on_fail to have it delete W if it fails to equip

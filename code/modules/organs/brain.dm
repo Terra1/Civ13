@@ -13,9 +13,10 @@
 	throw_range = 5
 	relative_size = 60
 	attack_verb = list("attacked", "slapped", "whacked")
-	var/mob/living/human/brain/brainmob = null
+	var/mob/living/brain/brainmob = null
 	map_storage_saved_vars = "density;icon_state;dir;name;pixel_x;pixel_y;container;name;real_name"
 	
+	var/can_use_mmi = TRUE
 	var/const/damage_threshold_count = 10
 	var/damage_threshold_value = 10
 	var/healed_threshold = 1
@@ -34,24 +35,60 @@
 	damage_threshold_value = round(max_damage / damage_threshold_count)
 	defib_timer = (config.defib_timer MINUTES) / 2
 
+	spawn(5)
+		if(brainmob && brainmob.client)
+			LAZYCLEARLIST(brainmob.client.screen)
+
 /obj/item/organ/brain/Destroy()
 	. = ..()
 
+/obj/item/organ/brain/proc/transfer_identity(var/mob/living/human/H)
+
+	if(!brainmob)
+		brainmob = new(src)
+		brainmob.SetName(H.real_name)
+		brainmob.real_name = H.real_name
+		brainmob.dna = H.dna.Clone()
+		brainmob.timeofhostdeath = H.timeofdeath
+
+	if(H.mind)
+		H.mind.transfer_to(brainmob)
+
+	to_chat(brainmob, SPAN_NOTICE("You feel slightly disoriented. That's normal when you're just \a [initial(src.name)]."))
+	callHook("debrain", list(brainmob))
+
 /obj/item/organ/brain/examine(mob/user) // -- TLE
 	..(user)
-	user << "This one seems particularly lifeless. Perhaps it will regain some of its luster later.."
+	if(brainmob && brainmob.client) //The brain has an active player inside.
+		user << "You can feel the small spark of life still left in this one."
+	else
+		user << "This one seems particularly lifeless. Perhaps it will regain some of its luster later.."
 
 /obj/item/organ/brain/removed(var/mob/living/user)
+	if(!istype(owner))
+		return ..()
 
-	name = "[owner.real_name]'s brain"
+	if(name == initial(name))
+		name = "\the [owner.real_name]'s [initial(name)]"
+
+	transfer_identity(owner)
 
 	..()
 
 /obj/item/organ/brain/replaced(var/mob/living/target)
 
-	if (target.key)
+	if(!..()) return 0
+
+	if(target.key)
 		target.ghostize()
-	..()
+
+	if(brainmob)
+		if(brainmob.mind)
+			brainmob.mind.transfer_to(target)
+		else
+			target.key = brainmob.key
+
+	return 1
 
 /obj/item/organ/brain/proc/take_internal_damage(var/damage, var/silent)
 	set waitfor = 0

@@ -686,6 +686,46 @@
 /mob/proc/stat_header(title)
 	return "<span style = 'font-size: 13px;'><small><b>[title]</b></small></span>"
 
+// Not sure what to call this. Used to check if humans are wearing an AI-controlled exosuit and hence don't need to fall over yet.
+/mob/proc/can_stand_overridden()
+	return 0
+
+//Updates lying and icons
+/mob/proc/UpdateLyingBuckledAndVerbStatus()
+	if(!resting && cannot_stand() && can_stand_overridden())
+		lying = 0
+	else if(buckled)
+		anchored = TRUE
+		if(istype(buckled))
+			if(buckled.buckle_movable)
+				anchored = FALSE
+	else
+		lying = incapacitated(INCAPACITATION_KNOCKDOWN)
+
+	if(lying)
+		set_density(0)
+		for (var/obj/item/item as anything in GetAllHeld())
+			unEquip(item)
+	else
+		set_density(initial(density))
+	reset_layer()
+
+	//Temporarily moved here from the various life() procs
+	//I'm fixing stuff incrementally so this will likely find a better home.
+	//It just makes sense for now. ~Carn
+	if( update_icon )	//forces a full overlay update
+		update_icon = 0
+		regenerate_icons()
+	else if( lying != lying_prev )
+		update_icons()
+
+/mob/proc/reset_layer()
+	if(lying)
+		plane = DEFAULT_PLANE
+		layer = LYING_MOB_LAYER
+	else
+		reset_plane_and_layer()
+
 /mob/Stat()
 	..()
 	. = (is_client_active(10 MINUTES))

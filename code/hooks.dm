@@ -49,6 +49,13 @@
  */
 /hook/death
 
+/**
+ * Debrained hook.
+ * Called in brain_item.dm when someone gets debrained.
+ * Parameters: var/obj/item/organ/brain
+ */
+/hook/debrain
+
 /proc/callHook(hook, list/args=null)
 	var/hook_path = text2path("/hook/[hook]")
 	if (!hook_path)

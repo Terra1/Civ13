@@ -551,6 +551,14 @@ var/list/coefflist = list()
 		U.teeth_list += T
 	ingested.add_reagent("nutriment",50)
 
+	if(!client || !key) //Don't boot out anyone already in the mob.
+		for (var/obj/item/organ/brain/H in world)
+			if(H.brainmob)
+				if(H.brainmob.real_name == src.real_name)
+					if(H.brainmob.mind)
+						H.brainmob.mind.transfer_to(src)
+						qdel(H)
+
 	..()
 
 /mob/living/human/proc/is_lung_ruptured()

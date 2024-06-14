@@ -40,6 +40,9 @@ What is the naming convention for planes or layers?
 
 */
 
+#define DEFAULT_PLANE                   1
+	#define LYING_MOB_LAYER             3.07
+
 #define SPACE_PLANE	 -10
 
 #define PARALLAX_PLANE  -9
@@ -61,3 +64,7 @@ What is the naming convention for planes or layers?
 #define FLOOR_PLANE 0
 
 #define UNDERFLOOR_PLANE -1
+
+/atom/proc/reset_plane_and_layer()
+	plane = initial(plane)
+	layer = initial(layer)

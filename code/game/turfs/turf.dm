@@ -62,6 +62,7 @@ var/list/interior_areas = list(/area/caribbean/houses,
 	var/available_snow = 0
 	var/bullethole_count = 0
 	var/overlay_priority = 0
+	var/has_dense_atom
 
 	map_storage_saved_vars = "icon_state;name"
 
@@ -95,6 +96,45 @@ var/list/interior_areas = list(/area/caribbean/houses,
 					return FALSE
 
 		return TRUE
+
+/turf/proc/is_dense()
+	if (density)
+		return TRUE
+	if (isnull(has_dense_atom))
+		has_dense_atom = FALSE
+		if (contains_dense_objects())
+			has_dense_atom = TRUE
+	return has_dense_atom
+
+/turf/proc/is_opaque()
+	if (opacity)
+		return TRUE
+	if (isnull(has_opaque_atom))
+		has_opaque_atom = FALSE
+		for (var/atom/A in contents)
+			if (A.opacity)
+				has_opaque_atom = TRUE
+				break
+	return has_opaque_atom
+
+/turf/Entered(atom/movable/AM)
+	. = ..()
+	if (istype(AM))
+		if (AM.density)
+			has_dense_atom = TRUE
+		if (AM.opacity)
+			has_opaque_atom = TRUE
+
+/turf/Exited(atom/movable/AM, atom/newloc)
+	. = ..()
+	if (istype(AM))
+		if(AM.density)
+			has_dense_atom = null
+		if (AM.opacity)
+			has_opaque_atom = null
+	else
+		has_dense_atom = null
+		has_opaque_atom = null
 
 /turf/proc/update_icon()
 	return

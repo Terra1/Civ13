@@ -19,6 +19,9 @@
 							newcolor1, newcolor1, newcolor2)
 	return colour_matrix
 
+/mob/proc/isSynthetic()
+	return FALSE
+
 /client/proc/colour_transition(var/list/colour_to = null, var/time = 10) //Call this with no parameters to reset to default.
 	animate(src, color=colour_to, time=time, easing=SINE_EASING)
 
