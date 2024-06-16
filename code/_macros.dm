@@ -3,7 +3,7 @@
 
 /*
  Get the turf that `A` resides in, regardless of any containers.
-
+ 
  Use in favor of `A.loc` or `src.loc` so that things work correctly when
  stored inside an inventory, locker, or other container.
  */
@@ -94,7 +94,8 @@ Get the ultimate area of `A`, similarly to [get_turf].
 
 #define forrange(x) for (var/v = 1 to x)
 
-#define to_world(message)								   to_chat(world, message)
+#define to_chat(target, message)							target << message
+#define to_world(message)								   world << message
 #define to_world_log(message)							   world.log << message
 #define sound_to(target, sound)							 target << sound
 #define show_browser(target, browser_content, browser_name) target << browse(browser_content, browser_name)
