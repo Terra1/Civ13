@@ -12,9 +12,9 @@
 	..()
 	processing_objects += src
 
-/obj/structure/iv_drip/Del()
+/obj/structure/iv_drip/Destroy()
 	processing_objects -= src
-	..()
+	return ..()
 
 /obj/structure/iv_drip/update_icon()
 	if (attached)
@@ -214,7 +214,7 @@
 					if (0 to 9)			icon_state = "bp_empty"
 					if (10 to 50) 		icon_state = "bp_half_saline"
 					if (51 to INFINITY)	icon_state = "bp_full_saline"
-			
+
 		else
 			icon_state = "bp_empty"
 

@@ -382,7 +382,7 @@
 
 	if (!target_mob)
 		return
-	
+
 	if (hit_zone && istype(src, /obj/item/projectile/shell))
 		var/obj/item/projectile/shell/S = src
 		if(S.initiated)
@@ -645,7 +645,7 @@
 					if (O.density || istype(O, /obj/structure/window/classic) || istype(O, /obj/structure/table)) // hack
 						O.pre_bullet_act(src)
 						if (O.bullet_act(src, def_zone) != PROJECTILE_CONTINUE)
-							if (O && !O.gcDestroyed)
+							if (O && !O.gc_destroyed)
 								if (O.density && !istype(O, /obj/structure))
 									if (istype(O, /obj/covers))
 										var/obj/covers/CVR = O
@@ -673,7 +673,7 @@
 						if ((src.atype == "cannonball" && prob(18)) || src.atype != "cannonball")
 							O.pre_bullet_act(src)
 							if (O.bullet_act(src, def_zone) != PROJECTILE_CONTINUE)
-								if (O && !O.gcDestroyed)
+								if (O && !O.gc_destroyed)
 									passthrough = FALSE
 
 	for(var/obj/structure/window/barrier/S in T)

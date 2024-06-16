@@ -16,7 +16,6 @@ serverdata.txt
 .DS_Store
 config/host.txt
 recipes.txt
-.vscode/
 cfg/admin.txt
 nullobj.txt
 *.code-workspace
@@ -33,3 +32,6 @@ civ13od.dme
 odcomp.bat
 
 config/host.txt
+
+#Visual studio stuff
+*.vscode/*

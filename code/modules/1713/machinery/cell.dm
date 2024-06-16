@@ -142,9 +142,9 @@
 	..()
 	processing_objects += src
 
-/obj/machinery/cell_charger/Del()
+/obj/machinery/cell_charger/Destroy()
 	processing_objects -= src
-	..()
+	return ..()
 
 /obj/machinery/cell_charger/update_icon()
 	icon_state = "ccharger[charging ? 1 : 0]"

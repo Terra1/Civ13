@@ -14,9 +14,9 @@
 	..()
 	processing_objects += src
 
-/obj/structure/optable/Del()
+/obj/structure/optable/Destroy()
 	processing_objects -= src
-	..()
+	return ..()
 
 //	spawn(100) //Wont the MC just call this process() before and at the 10 second mark anyway?
 //		process()

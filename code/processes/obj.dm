@@ -9,7 +9,7 @@
 /process/obj/fire()
 	for (current in current_list)
 		var/obj/O = current
-		if (!isDeleted(O))
+		if (!QDELETED(O))
 			try
 				if (O.process() == PROCESS_KILL)
 					processing_objects -= O

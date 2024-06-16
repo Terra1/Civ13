@@ -379,7 +379,7 @@ var/world_topic_spam_protect_time = world.timeofday
 	. += "world.address=[world.address]"
 	. += ";"
 	. += "round_timer=[roundduration2text()]"
-	. += ";" 
+	. += ";"
 	if (map)
 		. += "map=[map.title]"
 		. += ";"
@@ -436,7 +436,7 @@ var/global/nextsave = 0
 				var/list/tempmsg = splittext(msg, ":::")
 				if (tempmsg.len == 2)
 
-					for (var/client/C in admins)
+					for (var/client/C in GLOB.admins)
 						if (R_MENTOR & C.holder.rights || R_MOD & C.holder.rights)
 							C << "<span class='admin_channel'><IMG src='\ref[text_tag_icons.icon]' class='text_tag' iconstate='a-discord' alt='ASAY-Discord'> <span class='name'>[tempmsg[1]]</span>(Discord): <span class='message'>[tempmsg[2]]</span></span>"
 					log_discord_asay(msg)

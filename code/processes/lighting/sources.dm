@@ -12,7 +12,7 @@
 /process/lighting_sources/fire()
 
 	for (current in lighting_update_lights)
-		if (!isDeleted(current))
+		if (!QDELETED(current))
 
 			var/datum/light_source/L = current
 			. = L.check()

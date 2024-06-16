@@ -14,7 +14,7 @@
 	// get cleanable decals
 	for (current in current_list)
 		var/obj/effect/decal/cleanable/C = current
-		if (!isDeleted(C))
+		if (!QDELETED(C))
 			if (!turf2cleanables[C.loc])
 				turf2cleanables[C.loc] = 0
 			++turf2cleanables[C.loc]

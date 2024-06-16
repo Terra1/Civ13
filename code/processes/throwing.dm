@@ -14,7 +14,7 @@
 
 		var/atom/movable/AM = current
 
-		if (!isDeleted(AM))
+		if (!QDELETED(AM))
 			if (AM.loc)
 				try
 					switch (AM.throwmode)

@@ -757,25 +757,24 @@ proc/dd_sortedTextList(list/incoming)
 		for(var/i=0, i<len, ++i)
 			L.Swap(fromIndex++, toIndex++)
 
-//replaces reverseList ~Carnie
-/proc/reverseRange(list/L, start=1, end=0)
-	if(L.len)
-		start = start % L.len
-		end = end % (L.len+1)
-		if(start <= 0)
-			start += L.len
-		if(end <= 0)
-			end += L.len + 1
-
-		--end
-		while(start < end)
-			L.Swap(start++,end--)
-
-	return L
-
 // Truncates a list "L" to "max" size by deleting the oldest (from index 1) entries.
 // Will not affect lists that are under the max size.
 #define truncate_oldest(L, max) (L.len + 1 > max ? L.Cut(1, 1 + (L.len - max)) : null)
 
 #define listequal(A, B) (A.len == B.len && !length(A^B))
 
+///replaces reverseList ~Carnie
+/proc/reverse_range(list/inserted_list, start = 1, end = 0)
+	if(inserted_list.len)
+		start = start % inserted_list.len
+		end = end % (inserted_list.len + 1)
+		if(start <= 0)
+			start += inserted_list.len
+		if(end <= 0)
+			end += inserted_list.len + 1
+
+		--end
+		while(start < end)
+			inserted_list.Swap(start++, end--)
+
+	return inserted_list

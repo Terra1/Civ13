@@ -14,7 +14,7 @@
 	// get casings
 	for (current in current_list)
 		var/obj/item/ammo_casing/A = current
-		if (!isDeleted(A))
+		if (!QDELETED(A))
 			if (A.loc && isturf(A.loc)) // so we don't delete ammo casings in guns or mags or nullspace
 				if (!turf2casings[A.loc])
 					turf2casings[A.loc] = 0

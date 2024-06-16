@@ -1055,9 +1055,9 @@
 	..()
 	processing_objects += src
 
-/obj/item/tank_system/Del()
+/obj/item/tank_system/Destroy()
 	processing_objects -= src
-	..()
+	return ..()
 
 /obj/item/tank_system/ecms
 	name = "ECMS"

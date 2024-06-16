@@ -15,7 +15,7 @@
 		if (!M || !isliving(M))
 			continue
 
-		if (isDeleted(M))
+		if (QDELETED(M))
 			catchBadType(M)
 			mob_list -= M
 			living_mob_list -= M

@@ -110,7 +110,7 @@
 //	var/num_devs_online = FALSE
 
 	if (holder)
-		for (var/client/C in admins)
+		for (var/client/C in GLOB.admins)
 			if (!C.visible_in_who)
 				continue
 
@@ -198,7 +198,7 @@
 				num_mentors_online++
 
 	else
-		for (var/client/C in admins)
+		for (var/client/C in GLOB.admins)
 			if (R_ADMIN & C.holder.rights || (!R_MOD & C.holder.rights && !R_MENTOR & C.holder.rights))
 				if (!C.holder.fakekey)
 					adminmsg += "\t[C] is a [C.holder.rank]\n"
@@ -444,7 +444,7 @@
 	for (var/client/t in listening)
 		var/admin_stuff = ""
 		var/prefix = ""
-		if (t in admins)
+		if (t in GLOB.admins)
 			admin_stuff += "/([key])"
 			if (t != src)
 				admin_stuff += "([admin_jump_link(mob, t.holder)])"

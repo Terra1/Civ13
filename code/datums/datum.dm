@@ -17,6 +17,10 @@
 	  */
 	var/gc_destroyed
 
+	/// Open uis owned by this datum
+	/// Lazy, since this case is semi rare
+	var/list/open_uis
+
 	/// Active timers with this datum as the target
 	var/list/active_timers
 	/// Status traits attached to this datum. associative list of the form: list(trait name (string) = list(source1, source2, source3,...))
@@ -92,6 +96,16 @@
  * Returns [QDEL_HINT_QUEUE]
  */
 /datum/proc/Destroy(force=FALSE)
+	if(extensions)
+		for(var/expansion_key in extensions)
+			var/list/extension = extensions[expansion_key]
+			if(islist(extension))
+				extension.Cut()
+			else
+				qdel(extension)
+		extensions = null
+
+	GLOB.destroyed_event?.raise_event(src)
 	if (GLOB.nanomanager)
 		GLOB.nanomanager.close_uis(src) // In the future, we will remove this, as will the replacement of nanoui with tgui
 	SHOULD_CALL_PARENT(TRUE)
@@ -123,6 +137,7 @@
 
 	clear_signal_refs()
 	//END: ECS SHIT
+	cleanup_events(src)
 	return QDEL_HINT_QUEUE
 
 /datum/proc/clear_signal_refs()

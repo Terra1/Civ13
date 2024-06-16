@@ -183,7 +183,6 @@
 
 	if (holder)
 		holder.associate(src)
-		admins |= src
 		holder.owner = src
 
 	sleep(1)
@@ -238,7 +237,7 @@
 			winset(src, null, "command=\".configure graphics-hwmode off\"")
 			sleep(1) // wait a bit more, possibly fixes hardware mode not re-activating right
 			winset(src, null, "command=\".configure graphics-hwmode on\"")
-	
+
 	send_resources()
 
 	fix_nanoUI()
@@ -418,10 +417,6 @@
 
 /client/proc/_winget(arg1, arg2)
 	return winget(src, arg1, arg2)
-
-// testing
-/client/proc/delme()
-	del src
 
 /client/proc/calculate_is_active_non_observer()
 	is_active_non_observer = (src && mob && !istype(mob, /mob/observer) && !is_minimized())

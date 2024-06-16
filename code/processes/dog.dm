@@ -11,7 +11,7 @@
 /process/dog/fire()
 	try
 		for (current in current_list)
-			if (!isDeleted(current))
+			if (!QDELETED(current))
 				var/mob/living/simple_animal/complex_animal/dog/dog = current
 				if (dog.stat == CONSCIOUS && dog.walking_to)
 					if (ismob(dog.walking_to))

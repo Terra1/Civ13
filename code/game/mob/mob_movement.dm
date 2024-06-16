@@ -687,7 +687,7 @@
 				mob.grab_list = list()
 			for (var/datum in mob.grab_list)
 				var/datum/D = datum
-				if (D.gcDestroyed)
+				if (D.gc_destroyed)
 					mob.grab_list -= D
 
 			//Something with grabbing things

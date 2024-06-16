@@ -32,21 +32,11 @@
 	var/area/a = null
 
 	var/load_datums = 1
-	
+
 /atom/movable/New()
 	..()
 	if (auto_init && ticker && ticker.current_state == GAME_STATE_PLAYING)
 		initialize()
-
-/atom/movable/Del()
-	if (!gcDestroyed && loc)
-//		testing("GC: -- [type] was deleted via del() rather than qdel() --")
-		crash_with("GC: -- [type] was deleted via del() rather than qdel() --") // stick a stack trace in the runtime logs
-//	else if (!gcDestroyed))
-//		testing("GC: [type] was deleted via GC without qdel()") //Not really a huge issue but from now on, please qdel()
-//	else
-//		testing("GC: [type] was deleted via GC with qdel()")
-	..()
 
 /atom/movable/Destroy()
 	. = ..()
@@ -96,7 +86,7 @@
 	return TRUE
 
 /atom/movable/proc/initialize()
-	if (gcDestroyed)
+	if (gc_destroyed)
 		crash_with("GC: -- [type] had initialize() called after qdel() --")
 
 /atom/movable/Bump(var/atom/A, yes)
