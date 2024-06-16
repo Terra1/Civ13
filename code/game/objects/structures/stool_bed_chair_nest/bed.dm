@@ -47,9 +47,9 @@
 	..()
 	processing_objects |= src
 
-/obj/structure/bed/hammock/Del()
+/obj/structure/bed/hammock/Destroy()
 	processing_objects -= src
-	..()
+	return ..()
 
 
 /obj/structure/bed/hammock/process()

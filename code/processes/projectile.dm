@@ -15,7 +15,7 @@
 		var/obj/item/projectile/P = current
 
 		// projectiles will qdel() and remove themselves from projectile_list automatically
-		if (!isDeleted(P))
+		if (!QDELETED(P))
 			if (P.loc)
 				try
 					P.process()

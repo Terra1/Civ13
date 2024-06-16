@@ -36,11 +36,11 @@ var/movementMachine/movementMachine = null
 			// this try-catch block is here now because apparently client can be something that isn't a client, causing the game to crash
 			try
 
-				if (client && client:type == /client && !client:movement_busy && !isDeleted(client))
+				if (client && client:type == /client && !client:movement_busy && !QDELETED(client))
 
 					var/mob/M = client:mob
 
-					if (!isDeleted(M))
+					if (!QDELETED(M))
 						if ((M.movement_eastwest || M.movement_northsouth) && M.client.canmove && !M.client.moving && world.time >= M.client.move_delay)
 							var/diag = FALSE
 							var/movedir = M.movement_northsouth ? M.movement_northsouth : M.movement_eastwest
@@ -62,7 +62,7 @@ var/movementMachine/movementMachine = null
 							if (ishuman(M))
 								var/mob/living/human/H = M
 								if (H.football && H.football.owner == H)
-									H.football.update_movement()	
+									H.football.update_movement()
 					else
 						mob_list -= M
 				else

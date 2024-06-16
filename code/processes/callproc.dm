@@ -18,7 +18,7 @@
 /process/callproc/fire()
 	for (current in queue)
 		var/callproc_helper/C = current
-		if (!C || isDeleted(C.object) || !C.function)
+		if (!C || QDELETED(C.object) || !C.function)
 			queue -= C
 			continue
 		if (world.time >= C.time)

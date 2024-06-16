@@ -305,9 +305,9 @@
 	create_reagents(50)
 	processing_objects += src
 
-/obj/structure/shower/Del()
+/obj/structure/shower/Destroy()
 	processing_objects -= src
-	..()
+	return ..()
 
 /obj/structure/shower/ex_act(severity)
 	switch(severity)
@@ -898,7 +898,7 @@
 		user << "<span class='notice'>You wet \the [O] in \the [src].</span>"
 		playsound(loc, 'sound/effects/slosh.ogg', 25, TRUE)
 		return
-	
+
 	else if (istype(O, /obj/item/weapon/soap) && dirty == TRUE && do_after(user, 100, src))
 		dirty = FALSE
 		to_chat(user, "You clean \the [src].")

@@ -56,18 +56,18 @@ var/list/admin_datums = list()
 		owner = C
 		owner.holder = src
 		owner.add_admin_verbs()
-		admins |= C
+		GLOB.admins |= C
 
 /datum/admins/proc/disassociate()
 	if (owner)
-		admins -= owner
+		GLOB.admins -= owner
 		owner.remove_admin_verbs()
 		owner.deadmin_holder = owner.holder
 		owner.holder = null
 
 /datum/admins/proc/reassociate()
 	if (owner)
-		admins |= owner
+		GLOB.admins |= owner
 		owner.holder = src
 		owner.deadmin_holder = null
 		owner.add_admin_verbs()
@@ -76,4 +76,9 @@ var/list/admin_datums = list()
 /client/proc/deadmin()
 	if (holder)
 		holder.disassociate()
+	return TRUE
+
+/datum/admins/proc/check_for_rights(rights_required)
+	if(rights_required && !(rights_required & rights))
+		return FALSE
 	return TRUE

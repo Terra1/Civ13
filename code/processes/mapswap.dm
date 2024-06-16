@@ -49,7 +49,7 @@
 		if (config.allowedgamemodes == "TDM")
 			if (clients.len >= 25) // Temporary solution
 				var/moderator_present = FALSE
-				for (var/client/C in admins)
+				for (var/client/C in GLOB.admins)
 					if(R_MOD||R_ADMIN & C.holder.rights)
 						moderator_present = TRUE
 						break

@@ -8,15 +8,15 @@ var/global/floorIsLava = FALSE
 	webhook_send_alog(ckey, "ADMIN LOG: [msg]")
 	msg = "<span class=\"log_message\"><span class=\"prefix\">ADMIN LOG:</span> <span class=\"message\">[msg]</span></span>"
 	log_adminwarn(msg)
-	
-	for (var/client/C in admins)
+
+	for (var/client/C in GLOB.admins)
 		C << msg
 
 /proc/msg_admin_attack(var/text, var/ckey = "", var/ckey2 = "") //Toggleable Attack Messages
 	webhook_send_attacklog("ATTACK LOG: [text]", ckey, ckey2)
 	log_attack(text)
 	var/rendered = "<span class=\"log_message\"><span class=\"prefix\">ATTACK:</span> <span class=\"message\">[text]</span></span>"
-	for (var/client/C in admins)
+	for (var/client/C in GLOB.admins)
 		if (R_ADMIN & C.holder.rights)
 			if (C.is_preference_enabled(/datum/client_preference/admin/show_attack_logs))
 				var/msg = rendered
@@ -1149,7 +1149,7 @@ proc/admin_notice(var/message, var/rights)
 		for(var/obj/structure/voyage/anchor_capstan/VAC in world)
 			VAC.update_icon()
 		to_chat(world, "<font size=4 color='yellow'>The ship arrives at the destination.</font>")
-		
+
 		nmap.load_map(nam,loct)
 		message_admins("[key_name(usr)] manually loaded an event.", key_name(usr))
 
@@ -1232,7 +1232,7 @@ proc/admin_notice(var/message, var/rights)
 	if (map)
 		map.load_new_recipes()
 	world.log << "Finished loading recipes."
-	
+
 /datum/admins/proc/toggle_ores()
 	set category = "Nomads"
 	set desc = "Toggle ore spawners on and off"

@@ -59,7 +59,7 @@
 	//var/list/adm = get_admin_counts()
 	//var/list/presentmins = adm["present"]
 	//var/list/afkmins = adm["afk"]
-	.["admins"] = admins.len //length_char(presentmins) + length_char(afkmins)
+	.["admins"] = GLOB.admins.len //length_char(presentmins) + length_char(afkmins)
 	//.["gamestate"] = SSticker.current_state
 
 	.["map_name"] = map.title ? map.title : "Loading..."

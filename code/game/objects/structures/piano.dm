@@ -25,9 +25,9 @@
 /obj/structure/piano/New()
 	processing_objects += src
 
-/obj/structure/piano/Del()
+/obj/structure/piano/Destroy()
 	processing_objects -= src
-	..()
+	return ..()
 
 /obj/structure/piano/process()
 	for (var/mob/living/human/H in range(1, src))

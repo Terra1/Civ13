@@ -19,10 +19,6 @@
 //Object specific defines
 #define CANDLE_LUM 3 //For how bright candles are
 
-
-//some arbitrary defines to be used by self-pruning global lists. (see master_controller)
-#define PROCESS_KILL 26	//Used to trigger removal from a processing list
-
 //=================================================
 #define HOSTILE_STANCE_IDLE 1
 #define HOSTILE_STANCE_ALERT 2

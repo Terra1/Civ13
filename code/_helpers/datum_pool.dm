@@ -50,31 +50,6 @@ var/global/list/GlobalPool = list()
 		return D
 	return FALSE
 
-/proc/PlaceInPool(var/datum/D)
-	if (!istype(D))
-		return
-
-	if (length(GlobalPool[D.type]) > ATOM_POOL_COUNT)
-		#ifdef DEBUG_ATOM_POOL
-		to_chat(world, text("DEBUG_DATUM_POOL: PlaceInPool([]) exceeds []. Discarding.", D.type, ATOM_POOL_COUNT))
-		#endif
-		if (processes.garbage)
-			processes.garbage.AddTrash(D)
-		else
-			del(D)
-		return
-
-	if (D in GlobalPool[D.type])
-		return
-
-	if (!GlobalPool[D.type])
-		GlobalPool[D.type] = list()
-
-	GlobalPool[D.type] += D
-
-	D.Destroy()
-	D.ResetVars()
-
 /proc/IsPooled(var/datum/D)
 	if (isnull(GlobalPool[D.type]))
 		return FALSE

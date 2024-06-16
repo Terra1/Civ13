@@ -13,9 +13,9 @@
 	..()
 	processing_objects |= src
 
-/obj/structure/noose/Del()
+/obj/structure/noose/Destroy()
 	processing_objects -= src
-	..()
+	return ..()
 
 /obj/structure/noose/bullet_act(var/obj/item/projectile/P)
 	if (hanging)
@@ -119,9 +119,9 @@
 	..()
 	processing_objects |= src
 
-/obj/structure/gallows/Del()
+/obj/structure/gallows/Destroy()
 	processing_objects -= src
-	..()
+	return ..()
 
 /obj/structure/gallows/bullet_act(var/obj/item/projectile/P)
 	if (hanging)
@@ -290,9 +290,9 @@
 	..()
 	processing_objects |= src
 
-/obj/structure/cross/Del()
+/obj/structure/cross/Destroy()
 	processing_objects -= src
-	..()
+	return ..()
 
 /obj/structure/cross/bullet_act(var/obj/item/projectile/P)
 	if (hanging)
@@ -387,9 +387,9 @@
 	..()
 	processing_objects |= src
 
-/obj/structure/pillory/Del()
+/obj/structure/pillory/Destroy()
 	processing_objects -= src
-	..()
+	return ..()
 
 /obj/structure/pillory/bullet_act(var/obj/item/projectile/P)
 	if (hanging && prob(30))
@@ -503,9 +503,9 @@
 	..()
 	processing_objects |= src
 
-/obj/structure/post_execution/Del()
+/obj/structure/post_execution/Destroy()
 	processing_objects -= src
-	..()
+	return ..()
 
 /obj/structure/post_execution/bullet_act(var/obj/item/projectile/P)
 	if (hanging && prob(30))

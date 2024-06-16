@@ -87,6 +87,8 @@ h1.alert, h2.alert		{color: #ff0000;}
 .rose					{color: #ff5050;}
 .notice					{color: #5a6d8d;}
 .ping					{color: #E1E1FF; font-weight: bold;}
+.boldannounce 			{color: #ff0000; font-weight: bold;}
+.boldwarning 			{color: #ff0000; font-style: italic; font-weight: bold;}
 
 .reflex_shoot			{color: #000099; font-style: italic;}
 

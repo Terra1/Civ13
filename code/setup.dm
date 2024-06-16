@@ -16,7 +16,7 @@
 	admin_notice("<span class='danger'>Initializing objects...</span>", R_DEBUG)
 	sleep(-1)
 	for (var/atom/movable/object in world)
-		if (!object.gcDestroyed)
+		if (!object.gc_destroyed)
 			object.initialize()
 
 	admin_notice("<span class='danger'>Initializing areas...</span>", R_DEBUG)
@@ -65,7 +65,7 @@
 						faction_list_organizer += current[1]
 	else
 		admin_notice("<span class='danger'>Failed to load factionlist!</span>", R_DEBUG)
-	
+
 	admin_notice("<span class='danger'>Initializing ban list...</span>", R_DEBUG)
 	sleep(-1)
 	if (load_bans())

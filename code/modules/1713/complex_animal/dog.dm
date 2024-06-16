@@ -38,9 +38,9 @@
 	var/following = null
 
 	var/prioritizes = "attacking"
-	
+
 	var/pounce_range = 3 // How far the mob can be away from a target in order for it to pounce
-	var/next_shred = -1 
+	var/next_shred = -1
 
 	var/last_patrol_area = null
 
@@ -66,9 +66,9 @@
 	update_icons()
 
 
-/mob/living/simple_animal/complex_animal/dog/Del()
+/mob/living/simple_animal/complex_animal/dog/Destroy()
 	dog_mob_list -= src
-	..()
+	return ..()
 
 /mob/living/simple_animal/verb/name_pet()
 	set category = null
@@ -522,7 +522,7 @@ s
 		if (get_dist(src, H) > pounce_range)
 			visible_message(SPAN_NOTICE("\The [src] stops trying to pounce."))
 			return
-		
+
 		throw_at(H, 5, 0.5, src)
 		visible_message(SPAN_DANGER("\The [src] pounces on [H]!"))
 
@@ -615,13 +615,13 @@ s
 					if (prioritizes == "attacking" && following)
 						stop_following()
 					walking_to = H
-					
+
 					/*
 					if (get_dist(src, H) <= pounce_range)
 						if (prob(60))
 							pounce(H)
 					*/
-					
+
 				else
 					shred(H)
 	else if (following)

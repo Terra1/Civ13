@@ -12,7 +12,7 @@
 /process/lighting_overlays/fire()
 
 	for (current in lighting_update_overlays)
-		if (!isDeleted(current))
+		if (!QDELETED(current))
 			var/atom/movable/lighting_overlay/L = current
 			L.update_overlay()
 			L.needs_update = FALSE

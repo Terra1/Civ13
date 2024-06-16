@@ -33,9 +33,9 @@
 	processing_objects += src
 	reagents = new /datum/reagents(100, src)
 
-/obj/structure/pot/Del()
+/obj/structure/pot/Destroy()
 	processing_objects -= src
-	..()
+	return ..()
 
 /obj/structure/pot/update_icon()
 	icon_state = "[state][base_state]"

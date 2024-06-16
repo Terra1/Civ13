@@ -8,7 +8,7 @@
 /process/nanoUI/fire()
 	for (current in current_list)
 		var/datum/nanoui/NUI = current
-		if (!isDeleted(NUI))
+		if (!QDELETED(NUI))
 			try
 				// runtime prevention
 				if (NUI.state && NUI.user)

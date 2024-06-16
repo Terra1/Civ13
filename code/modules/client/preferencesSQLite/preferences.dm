@@ -92,9 +92,9 @@ var/list/preferences_datums = list()
 			real_name = random_name(gender, species)
 			save_preferences(charprefs)
 
-/datum/preferences/Del()
+/datum/preferences/Destroy()
 	save_preferences()
-	..()
+	return ..()
 
 /datum/preferences/proc/update_setup()
 	player_setup.update_setup()

@@ -18,10 +18,10 @@ var/process/open_space/OS_controller = null
 	if (OS_controller)
 		OS_controller.open_spaces += src
 
-/turf/floor/broken_floor/Del()
+/turf/floor/broken_floor/Destroy()
 	if (OS_controller)
 		OS_controller.open_spaces -= src
-	..()
+	return ..()
 
 /turf/floor/broken_floor/update_icon()
 	overlays.Cut()
@@ -141,7 +141,7 @@ var/list/sky_drop_map = list()
 								H.overlays -= I
 								H.pixel_y = 0
 								qdel(I)
-								
+
 								playsound(get_turf(H), 'sound/effects/thud.ogg', 80)
 								shake_camera(H, 2)
 								C.canmove = TRUE

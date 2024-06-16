@@ -17,9 +17,9 @@
 	..()
 	processing_objects += src
 
-/obj/structure/beehive/Del()
+/obj/structure/beehive/Destroy()
 	processing_objects -= src
-	..()
+	return..()
 
 /obj/structure/beehive/update_icon()
 	overlays.Cut()

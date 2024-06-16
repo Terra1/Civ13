@@ -3,7 +3,7 @@
 
 /*
  Get the turf that `A` resides in, regardless of any containers.
- 
+
  Use in favor of `A.loc` or `src.loc` so that things work correctly when
  stored inside an inventory, locker, or other container.
  */
@@ -89,9 +89,6 @@ Get the ultimate area of `A`, similarly to [get_turf].
 // other
 #define isclient(A) istype(A, /client)
 
-// Tests if an datum has been deleted.
-#define isDeleted(D) (!D || D:gcDestroyed)
-
 #define forrange(x) for (var/v = 1 to x)
 
 #define to_chat(target, message)							target << message
@@ -161,7 +158,7 @@ Get the ultimate area of `A`, similarly to [get_turf].
 #define TURN_RIGHT(D) turn(D, -90)
 
 
-#define SPAN(class, X) "<span class='[class]'>[X]</span>"
+#define SPAN(class, X) "<span class='" + class + "'>" + X + "</span>"
 #define SPAN_NOTICE(X) SPAN("notice", X)
 #define SPAN_WARNING(X) SPAN("warning", X)
 #define SPAN_DANGER(X) SPAN("danger", X)
@@ -172,3 +169,5 @@ Get the ultimate area of `A`, similarly to [get_turf].
 #define SPAN_ALERT(X) SPAN("alert", X)
 #define SPAN_DEADSAY(X) SPAN("deadsay", X)
 #define SPAN_INFO(X) SPAN("info", X)
+#define SPAN_BOLDANNOUNCE(X) SPAN("boldannounce", X)
+#define SPAN_BOLDWARNING(X) SPAN("boldwarning", X)

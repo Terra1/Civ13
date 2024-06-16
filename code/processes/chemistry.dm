@@ -17,7 +17,7 @@
 
 	for (current in current_list)
 		var/datum/reagents/holder = current
-		if (!isDeleted(holder))
+		if (!QDELETED(holder))
 			if (!holder.process_reactions())
 				active_holders -= holder
 		else
