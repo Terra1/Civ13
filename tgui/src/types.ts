@@ -1,4 +1,4 @@
-export type Params = Record<string, string | number>;
+export type Params = Record<string, string | number | boolean>;
 export type Data = Record<string, any>;
 export type ScreenProps<D extends Data = Data> = { data: D; act: (action: string, params?: Params) => void; interactive: boolean; template: string };
 export type Config = { title?: string; status?: number; template?: string; ref?: string; window?: string; generation?: number };

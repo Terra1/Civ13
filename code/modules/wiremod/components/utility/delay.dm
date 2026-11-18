@@ -3,18 +3,30 @@
 	display_name = "Delay"
 	category = "Utility"
 
-	var/datum/circuit_input/delay_amount
-	var/datum/circuit_input/trigger
-	var/datum/circuit_output/output
+	var/datum/port/input/delay_amount
+	var/datum/port/input/trigger
+	var/datum/port/output/output
 	var/timer_id
 
 /obj/item/circuit_component/delay/populate_ports()
-	delay_amount = add_input("Delay", PORT_TYPE_NUMBER)
-	trigger = add_input("Trigger", PORT_TYPE_SIGNAL, PROC_REF(run_delay))
-	output = add_output("Output", PORT_TYPE_SIGNAL)
+	delay_amount = add_input_port("Delay", PORT_TYPE_NUMBER)
+	trigger = add_input_port("Trigger", PORT_TYPE_SIGNAL, trigger = PROC_REF(run_delay))
+	output = add_output_port("Output", PORT_TYPE_SIGNAL)
 
-/obj/item/circuit_component/delay/proc/run_delay(datum/circuit_input/input)
-	if(isnum(delay_amount.value) && delay_amount.value > 0)
-		timer_id = addtimer(CALLBACK(output, TYPE_PROC_REF(/datum/circuit_output, set_output), world.time), delay_amount.value * 10, TIMER_STOPPABLE)
-	else
-		output.set_output(world.time)
+/obj/item/circuit_component/delay/proc/run_delay(datum/port/input/input)
+	if(timer_id)
+		deltimer(timer_id)
+	var/delay = isnum(delay_amount.value) ? delay_amount.value : CIRCUIT_DELAY_MIN
+	delay = max(CIRCUIT_DELAY_MIN, min(delay, 600))
+	timer_id = addtimer(CALLBACK(src, PROC_REF(fire_delayed_output)), delay * 10, TIMER_STOPPABLE)
+
+/obj/item/circuit_component/delay/proc/fire_delayed_output()
+	timer_id = null
+	if(parent && output)
+		output.set_output(COMPONENT_SIGNAL)
+
+/obj/item/circuit_component/delay/Destroy()
+	if(timer_id)
+		deltimer(timer_id)
+		timer_id = null
+	return ..()
