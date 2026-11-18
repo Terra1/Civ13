@@ -2047,6 +2047,14 @@
 #endif
 #endif
 // END_SELECTED_MAP
+#include "code\modules\wiremod\_compat.dm"
+#include "code\modules\wiremod\core\component.dm"
+#include "code\modules\wiremod\core\integrated_circuit.dm"
+#include "code\modules\wiremod\core\port.dm"
+#include "code\modules\wiremod\components\math\arithmetic.dm"
+#include "code\modules\wiremod\components\math\comparison.dm"
+#include "code\modules\wiremod\components\string\concat.dm"
+#include "code\modules\wiremod\components\utility\delay.dm"
 // END_INCLUDE
 #include "code\modules\1713\modern_telecom.dm"
 #include "code\modules\1713\television.dm"

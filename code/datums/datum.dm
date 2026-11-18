@@ -63,7 +63,13 @@
 
 /// Stub for the SEND_SIGNAL macro - never called since nothing registers signals
 /datum/proc/_SendSignal(sigtype, list/arguments)
-	return NONE
+	var/list/signal_callbacks = _listen_lookup ? _listen_lookup[sigtype] : null
+	if(!signal_callbacks)
+		return NONE
+	var/result = NONE
+	for(var/datum/callback/callback in signal_callbacks.Copy())
+		result |= callback.Invoke(arglist(arguments))
+	return result
 
 /**
  * Called when a href for this datum is clicked
